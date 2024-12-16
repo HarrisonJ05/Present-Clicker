@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace Present_Clicker_Api.Models
 {
-    public class User
+    public class SaveRequest
     {
         public int Id { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
         public int Presents { get; set; }
         public int ClickerLevel { get; set; }
-        public DateTime LastSave { get; set; }
-
     }
 }

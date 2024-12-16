@@ -12,5 +12,7 @@ namespace Present_Clicker_Api.Models
     {
         public LeaderboardDb(DbContextOptions options) : base(options) { }
         public DbSet<User> Users { get; set; }
+        public DbSet<FilteredUserType> FilteredUserTypes { get; set; }
+        public DbSet<SaveRequest > SaveRequests { get; set; }
     }
 }
