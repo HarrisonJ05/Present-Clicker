@@ -13,27 +13,27 @@ namespace Present_Clicker_Api
 
         [Function("LoginFunction")]
 
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Admin, "Post")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "Post")] HttpRequest req)
         {
-            string reqBody = await new StreamReader(req.Body).ReadToEndAsync();
             User loginReq;
 
             try
             {
-                loginReq = JsonSerializer.Deserialize<User>(req.Body);
+                loginReq = await JsonSerializer.DeserializeAsync<User>(req.Body);
 
                 if (loginReq == null || string.IsNullOrEmpty(loginReq.Username) || string.IsNullOrEmpty(loginReq.Password))
                 {
                     return new BadRequestObjectResult("Username or Password incorrect");
                 }
 
-                await using var db = LeaderboardFactory.CreateDBContext("", loggerFactory);
+                await using var db = LeaderboardFactory.CreateDBContext("Server=tcp:openlibraryserver.database.windows.net;Authentication=Active Directory Default;Database=SantaClickerDb;", loggerFactory);
 
                 var user = db.Users.FirstOrDefault(u => u.Username == loginReq.Username);
 
                 if (user != null && user.Password == loginReq.Password)
                 {
-                    return new OkObjectResult("Login Successful!");
+                    Console.WriteLine("Login Successful!");
+                    return new OkObjectResult(user);
                 }
                 else
                 {

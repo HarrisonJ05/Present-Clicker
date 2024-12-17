@@ -13,7 +13,7 @@ namespace Present_Clicker_Api.Models
         public string Password { get; set; }
         public int Presents { get; set; }
         public int ClickerLevel { get; set; }
-        public DateTime LastSave { get; set; }
+        public DateTime LastSave { get; set; } = DateTime.UtcNow;
 
     }
 }

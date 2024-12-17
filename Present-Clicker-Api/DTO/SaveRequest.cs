@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Present_Clicker_Api.Models
+namespace Present_Clicker_Api.DTO
 {
-    public class FilteredUserType
+    public class SaveRequest
     {
         public int Id { get; set; }
         public string Username { get; set; }

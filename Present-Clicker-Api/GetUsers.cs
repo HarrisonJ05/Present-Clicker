@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using Present_Clicker_Api.DTO;
 using Present_Clicker_Api.Models;
 
 namespace Present_Clicker_Api
@@ -13,9 +14,9 @@ namespace Present_Clicker_Api
 
         [Function("GetUsers")]
 
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Admin, "Get")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "Get")] HttpRequest req)
         {
-            await using var db = LeaderboardFactory.CreateDBContext("", loggerFactory);
+            await using var db = LeaderboardFactory.CreateDBContext("Server=tcp:openlibraryserver.database.windows.net;Authentication=Active Directory Default;Database=SantaClickerDb;", loggerFactory);
 
             var users = db.Users.ToList();
 
@@ -25,7 +26,6 @@ namespace Present_Clicker_Api
                 filteredUsers = users.Select(user => new FilteredUserType{
                     Username = user.Username,
                     Presents = user.Presents,
-                    ClickerLevel = user.ClickerLevel,
                 }).ToList();
             }
 

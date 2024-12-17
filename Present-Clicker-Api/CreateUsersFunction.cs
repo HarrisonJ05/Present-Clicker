@@ -12,8 +12,9 @@ namespace Present_Clicker_Api
         private readonly ILogger<CreateUsersFunction> _logger = loggerFactory.CreateLogger<CreateUsersFunction>();
 
         [Function("CreateUsersFunction")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Admin, "post")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequest req)
         {
+            Console.WriteLine("Hello World");
             string reqBody = await new StreamReader(req.Body).ReadToEndAsync();
             User user;
 
@@ -21,7 +22,7 @@ namespace Present_Clicker_Api
 
             Console.WriteLine(user.Username);
 
-            await using var db = LeaderboardFactory.CreateDBContext("", loggerFactory);
+            await using var db = LeaderboardFactory.CreateDBContext("Server=tcp:openlibraryserver.database.windows.net;Authentication=Active Directory Default;Database=SantaClickerDb;", loggerFactory);
             try
             {
                 db.Users.Add(user);
