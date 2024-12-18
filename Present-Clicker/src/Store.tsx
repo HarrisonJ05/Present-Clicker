@@ -24,10 +24,12 @@ export const store : any = create<State & Actions>((set) => ({
     fallingImg: [],
     ppc: 1,
     clickerCost: 20,
+    userCount: 0,
+    users: [],
     setPresents: (presents: number) => set({presents}),
     setClicker: (clicker: number) => set({clicker}),
     setFallingImg: (image) => set((state) => ({fallingImg: [...state.fallingImg, image] })),
     removeFallingImg: (id) => set((state) => ({fallingImg: state.fallingImg.filter((img) => img.id !== id)})),
     setPpc: (ppc: number) => set({ppc}),
-    setClickerCost: (clickerCost: number) => set({clickerCost})
+    setClickerCost: (clickerCost: number) => set({clickerCost}),
 }))
