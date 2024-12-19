@@ -6,11 +6,11 @@ import UserSaveType from './UserSaveType';
 
 function Save() {
 
-    const {Id, Presents, ClickerLevel, clickerCost} = store();
+    const {Id, Presents, ClickerLevel, ClickerCost} = store();
 
     async function saveProgress() {
         try{
-            const response = await ky.post<UserSaveType>('http://localhost:7116/api/AutoSaveFunction', {json:{Id, Presents, ClickerLevel, clickerCost }}).json();
+            const response = await ky.post<UserSaveType>('http://localhost:7116/api/AutoSaveFunction', {json:{Id, Presents, ClickerLevel, ClickerCost }}).json();
             console.log("Successfully save at", response.LastSave)
         } catch(error){
             console.error("Failed to save", error)

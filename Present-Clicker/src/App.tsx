@@ -8,19 +8,20 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import Login from './Login'
 import Popup from 'reactjs-popup';
 import Save from './SaveButton'
+import SignUp from './SignUp'
 
 
 const queryClient = new QueryClient()
 
 export default function App() {
   
-  const {Presents, ClickerLevel, setPresents, setFallingImg, removeFallingImg} = store()
+  const {Username, Presents, signUpPopupOpen, ClickerLevel, loginPopupOpen, setLoginPopUpOpen, setPresents, setFallingImg, setSignUpPopupOpen, removeFallingImg} = store()
 
   const dropImg = () => {
     setPresents(Presents + ClickerLevel)
     for (let i = 0; i !== ClickerLevel; i++) {
       const newImg={
-        id: Date.now(),
+        id: Date.now() +i,
         position: Math.floor(Math.random() * 90),
       };
 
@@ -37,12 +38,28 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <div>
         <Save />
-        <Popup trigger={<motion.button whileTap={{scale: 0.9}} className='absolute flexbox right-4 -top-2 bg'>
+        {Username && (
+          <>
+          <p className='absolute font-medium text-sm flexbox left-40 top-2 bg'>Logged in as:</p>
+          <p className='absolute font-bold text-2xl flexbox left-40 top-6 bg'>{Username}</p>
+          </>
+        )}
+        <motion.button whileTap={{scale: 0.9}} onClick={() => setLoginPopUpOpen(true)} className='absolute flexbox right-4 -top-2 bg'>
           <img src='/imgs/XmasButtons.svg' className='w-28 z-0 h-auto flexbox ' />
           <p className='absolute flexbox top-1.8rem right-8 font-bold text-lg'>Login</p>
-        </motion.button>} position="left center" modal>
+        </motion.button>
+        <Popup 
+        open={loginPopupOpen}
+        onClose={() => setLoginPopUpOpen(false)}
+        position="left center" modal>
           <Login />
         </Popup>
+        <Popup 
+            open={signUpPopupOpen}
+            onClose={() => {setSignUpPopupOpen(false); setLoginPopUpOpen(false)}}
+            position="left center" modal>
+                <SignUp />
+            </Popup>
         <h1 className='font-bold text-4xl bg-top-band pt-5 pb-4 w-full'>{Presents}</h1>
         <h2 className='font-bold text-2xl bg-top-band pb-3 pt-0.5 w-80 mx-auto rounded-b-full'>Presents!</h2>
       </div>

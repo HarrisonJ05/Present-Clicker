@@ -1,13 +1,11 @@
 import {store} from './Store'
 import ky from 'ky'
 import {motion} from 'motion/react'
-import Popup from 'reactjs-popup';
-import SignUp from './SignUp';
 import UserType from './UserType';
 
 function Login() {
 
-    const {Username, Password, setUsername, setPassword, setPresents, setClicker, setClickerCost, setId} = store();
+    const {Username, Password, setUsername, setPassword, setPresents, setClicker, setClickerCost, setId, setLoginPopUpOpen, setSignUpPopupOpen} = store();
 
     async function handleLogin(e: React.FormEvent<HTMLElement>){
         e.preventDefault();
@@ -24,6 +22,7 @@ function Login() {
             }else{
             setClickerCost(response.clickerCost)
             }
+            setLoginPopUpOpen(false);
         } catch(error) {
             console.error("Unable to login", error)
 
@@ -32,7 +31,7 @@ function Login() {
 
     return(
         <div className='w-80 h-80 m-auto bg-LoginBg bg-cover rounded-xl justify-center text-center'>
-            <form className='mx-auto border-1 border-solid border-slate-800' onSubmit={handleLogin}>
+            <form className='mx-auto border-1 border-solid border-slate-800' onSubmit={(e) => handleLogin(e)}>
                 <p><input 
                     className='bg-top-band mt-20 text-white placeholder-white rounded-lg pl-2'
                     required 
@@ -51,7 +50,7 @@ function Login() {
                 </p>
                 <motion.button whileTap={{scale: 0.9}} type='submit' className='bg-top-band text-white rounded-lg px-2 py-1 mt-16'> Login </motion.button>
             </form>
-            <p>Don't have an account? <Popup trigger={<button className='text-blue-700'>Sign Up</button>} position="left center" modal><SignUp /></Popup></p>
+            <p>Don't have an account? <button  onClick={() => {setSignUpPopupOpen(true); setLoginPopUpOpen(false)}} className='text-blue-700'>Sign Up</button></p>
         </div>
     )
 }

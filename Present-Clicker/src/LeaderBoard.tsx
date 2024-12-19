@@ -13,7 +13,7 @@ function LeaderBoard() {
 
     if(error) return 'An error has occurred:' + error.message
 
-    console.log(data)
+    const sortedData = [...data].sort((a: any, b: any) => b.Presents - a.Presents);
 
     return (
         <div className='absolute text-center bg-top-band w-80 h-dvh top-4.5rem'>
@@ -25,7 +25,7 @@ function LeaderBoard() {
                     <th>Username</th>
                     <th>Presents</th>
                 </tr>
-                {data.map((user:any, i: number) => (
+                {sortedData.map((user:any, i: number) => (
                     <tr className='border-2' key={i+1}>
                         <td>{i+1}</td>
                         <td className='flexbox'>{user.Username}</td>
