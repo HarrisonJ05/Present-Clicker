@@ -2,12 +2,15 @@ import {store} from './Store';
 import {motion} from 'motion/react';
 
 function Upgrades() {
-    const {clicker, clickerCost, setClicker, setClickerCost, setPpc} = store()
+    const {Presents, ClickerLevel, ClickerCost, setPresents, setClicker, setClickerCost} = store()
 
     function UpgradeClick() {
-        setClicker(clicker*2)
-        setPpc(clicker)
-        setClickerCost(Math.floor(clickerCost*1.5))
+        if(Presents < ClickerCost){
+            return
+        }
+        setPresents(Presents - ClickerCost)
+        setClicker(ClickerLevel*2);
+        setClickerCost(Math.floor(ClickerCost*1.5))
     };
 
 
@@ -24,7 +27,7 @@ function Upgrades() {
                             <img className='absolute flexbox left-10 top-7.5rem w-10 h-10' src="/imgs/tap.png" />
                             <h3 className='absolute flexbox left-32 top-28 font-bold text-xl'>Click</h3>
                             <img className='absolute flexbox w-6 h-6 top-36 left-32' src="/imgs/gift.png"></img>
-                            <p className='absolute flexbox font-semibold left-40 top-36 text-base'>{clickerCost}</p>
+                            <p className='absolute flexbox font-semibold left-40 top-36 text-base'>{ClickerCost}</p>
                             </motion.button>
                         </li>
                     </div>
