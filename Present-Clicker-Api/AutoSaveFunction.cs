@@ -39,6 +39,7 @@ namespace Present_Clicker_Api
 
                 user.Presents = saveReq.Presents;
                 user.ClickerLevel = saveReq.ClickerLevel;
+                user.ClickerCost = saveReq.ClickerCost;
                 user.LastSave = DateTime.UtcNow;
 
                 await db.SaveChangesAsync();

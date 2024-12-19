@@ -8,6 +8,7 @@ namespace Present_Clicker_Api.DTO
 {
     public class FilteredUserType
     {
+        public int UserId { get; set; }
         public string Username { get; set; }
         public int Presents { get; set; }
     }

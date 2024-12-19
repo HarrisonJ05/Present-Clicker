@@ -9,8 +9,8 @@ namespace Present_Clicker_Api.DTO
     public class SaveRequest
     {
         public int Id { get; set; }
-        public string Username { get; set; }
         public int Presents { get; set; }
         public int ClickerLevel { get; set; }
+        public int ClickerCost { get; set; }
     }
 }

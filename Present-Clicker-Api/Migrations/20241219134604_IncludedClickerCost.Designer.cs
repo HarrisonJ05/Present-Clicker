@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Present_Clicker_Api.Models;
 
@@ -11,9 +12,11 @@ using Present_Clicker_Api.Models;
 namespace Present_Clicker_Api.Migrations
 {
     [DbContext(typeof(LeaderboardDb))]
-    partial class LeaderboardDbModelSnapshot : ModelSnapshot
+    [Migration("20241219134604_IncludedClickerCost")]
+    partial class IncludedClickerCost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

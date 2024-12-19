@@ -24,6 +24,7 @@ namespace Present_Clicker_Api
 
             foreach (var user in users) {
                 filteredUsers = users.Select(user => new FilteredUserType{
+                    UserId = user.Id,
                     Username = user.Username,
                     Presents = user.Presents,
                 }).ToList();
