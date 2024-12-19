@@ -2,11 +2,13 @@ import {store} from './Store';
 import {motion} from 'motion/react';
 
 function Upgrades() {
-    const {clicker, clickerCost, setClicker, setClickerCost, setPpc} = store()
+    const {Presents, ClickerLevel, clickerCost, setClicker, setClickerCost} = store()
 
     function UpgradeClick() {
-        setClicker(clicker*2)
-        setPpc(clicker)
+        if(Presents < clickerCost){
+            return
+        }
+        setClicker(ClickerLevel*2);
         setClickerCost(Math.floor(clickerCost*1.5))
     };
 

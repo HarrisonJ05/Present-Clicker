@@ -5,16 +5,20 @@ import FallingPresent from './FallingPresent'
 import Upgrades from './Upgrades'
 import LeaderBoard from './LeaderBoard'
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+import Login from './Login'
+import Popup from 'reactjs-popup';
+import Save from './SaveButton'
+
 
 const queryClient = new QueryClient()
 
 export default function App() {
   
-  const {presents, ppc, setPresents, setFallingImg, removeFallingImg} = store()
+  const {Presents, ClickerLevel, setPresents, setFallingImg, removeFallingImg} = store()
 
   const dropImg = () => {
-    setPresents(presents + ppc)
-    for (let i = 0; i !== ppc; i++) {
+    setPresents(Presents + ClickerLevel)
+    for (let i = 0; i !== ClickerLevel; i++) {
       const newImg={
         id: Date.now(),
         position: Math.floor(Math.random() * 90),
@@ -31,8 +35,17 @@ export default function App() {
   return (
     <>
     <QueryClientProvider client={queryClient}>
-      <h1 className='font-bold text-4xl bg-top-band pt-5 pb-4 w-full'>{presents}</h1>
-      <h2 className='font-bold text-2xl bg-top-band pb-3 pt-0.5 w-80 mx-auto rounded-b-full'>Presents!</h2>
+      <div>
+        <Save />
+        <Popup trigger={<motion.button whileTap={{scale: 0.9}} className='absolute flexbox right-4 -top-2 bg'>
+          <img src='/imgs/XmasButtons.svg' className='w-28 z-0 h-auto flexbox ' />
+          <p className='absolute flexbox top-1.8rem right-8 font-bold text-lg'>Login</p>
+        </motion.button>} position="left center" modal>
+          <Login />
+        </Popup>
+        <h1 className='font-bold text-4xl bg-top-band pt-5 pb-4 w-full'>{Presents}</h1>
+        <h2 className='font-bold text-2xl bg-top-band pb-3 pt-0.5 w-80 mx-auto rounded-b-full'>Presents!</h2>
+      </div>
       <FallingPresent />
       <LeaderBoard />
       <Upgrades />

@@ -2,11 +2,10 @@ import {useQuery} from '@tanstack/react-query'
 
 function LeaderBoard() {
 
-
     const { data, isPending, error } = useQuery({
         queryKey: ['repoData'],
         queryFn: () =>
-            fetch('http://localhost:7116/api/GetUsers', {mode: 'no-cors'}).then((res) =>
+            fetch('http://localhost:7116/api/GetUsers').then((res) =>
             res.json(),),
         })
 
@@ -14,17 +13,27 @@ function LeaderBoard() {
 
     if(error) return 'An error has occurred:' + error.message
 
+    console.log(data)
+
     return (
-        <div className='absolute bg-top-band w-80 h-dvh top-4.5rem left-0'>
-            <h2 className='pt-9 text-3xl text-center justify-center font-bold flexbox'>Leaderboard</h2>
-            <ul>
-                {data.map((user:any) => (
-                    <li>
-                        <p className='absolute flexbox'>{user.username}</p>
-                        <p className='absolute flexbox'>{user.presents}</p>
-                    </li>
+        <div className='absolute text-center bg-top-band w-80 h-dvh top-4.5rem'>
+            <h2 className='pt-9 text-3xl text-center justify-center font-bold flexbox pb-5'>Leaderboard</h2>
+            <table className='flexbox border-collapse w-72 justify-center text-center mx-auto'>
+                <thead>
+                <tr className='border-2'>
+                    <th className=''>Rank</th>
+                    <th>Username</th>
+                    <th>Presents</th>
+                </tr>
+                {data.map((user:any, i: number) => (
+                    <tr className='border-2' key={i+1}>
+                        <td>{i+1}</td>
+                        <td className='flexbox'>{user.Username}</td>
+                        <td className='flexbox'>{user.Presents}</td>
+                    </tr>
                 ))}
-            </ul>
+                </thead>
+            </table>
         </div>
     )
 }
