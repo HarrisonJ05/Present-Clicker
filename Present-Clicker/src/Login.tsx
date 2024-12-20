@@ -10,7 +10,7 @@ function Login() {
     async function handleLogin(e: React.FormEvent<HTMLElement>){
         e.preventDefault();
         try{
-            const response = await ky.post<UserType>('http://localhost:7116/api/LoginFunction', {json:{Username, Password}}).json();
+            const response = await ky.post<UserType>('https://santaclickerapi.azurewebsites.net/api/LoginFunction?', {json:{Username, Password}}).json();
             console.log("Login Successful", response)
             setId(response.id)
             setUsername(response.username)

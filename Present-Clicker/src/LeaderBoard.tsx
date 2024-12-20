@@ -5,7 +5,7 @@ function LeaderBoard() {
     const { data, isPending, error } = useQuery({
         queryKey: ['repoData'],
         queryFn: () =>
-            fetch('http://localhost:7116/api/GetUsers').then((res) =>
+            fetch('https://santaclickerapi.azurewebsites.net/api/GetUsers?').then((res) =>
             res.json(),),
         })
 

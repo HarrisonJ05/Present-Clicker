@@ -10,7 +10,7 @@ function Save() {
 
     async function saveProgress() {
         try{
-            const response = await ky.post<UserSaveType>('http://localhost:7116/api/AutoSaveFunction', {json:{Id, Presents, ClickerLevel, ClickerCost }}).json();
+            const response = await ky.post<UserSaveType>('https://santaclickerapi.azurewebsites.net/api/AutoSaveFunction?', {json:{Id, Presents, ClickerLevel, ClickerCost }}).json();
             console.log("Successfully save at", response.LastSave)
         } catch(error){
             console.error("Failed to save", error)

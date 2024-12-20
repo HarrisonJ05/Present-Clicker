@@ -10,7 +10,7 @@ function SignUp() {
     async function handleSignUp(e: React.FormEvent<HTMLElement>){
         e.preventDefault();
         try{
-            const response = await ky.post<UserType>('http://localhost:7116/api/CreateUsersFunction', {json:{Username, Password}}).json();
+            const response = await ky.post<UserType>('https://santaclickerapi.azurewebsites.net/api/CreateUsersFunction?', {json:{Username, Password}}).json();
             console.log("New user created", response)
             setId(response.id)
             setUsername(response.username)
