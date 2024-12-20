@@ -22,7 +22,7 @@ namespace Present_Clicker_Api
 
             Console.WriteLine(user.Username);
 
-            await using var db = LeaderboardFactory.CreateDBContext("Server=tcp:openlibraryserver.database.windows.net,1433;Initial Catalog=SantaClickerDb;Persist Security Info=False;User ID=HarrisonJ05;Password={Harrison77!};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;", loggerFactory);
+            await using var db = LeaderboardFactory.CreateDBContext("Server=tcp:openlibraryserver.database.windows.net;Authentication=Active Directory Default;Database=SantaClickerDb;", loggerFactory);
             try
             {
                 db.Users.Add(user);
