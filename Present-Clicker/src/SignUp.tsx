@@ -23,7 +23,7 @@ function SignUp() {
             setClickerCost(response.clickerCost)
             }
             setSignUpPopupOpen(false);
-            await ky.post<UserType>('http://localhost:7116/api/LoginFunction', {json:{Username, Password}}).json();
+            await ky.post<UserType>('https://santaclickerapi.azurewebsites.net/api/LoginFunction?', {json:{Username, Password}}).json();
         } catch(error) {
             console.error("Failed to create user", error)
 
