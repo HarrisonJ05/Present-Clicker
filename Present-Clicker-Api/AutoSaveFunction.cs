@@ -28,7 +28,7 @@ namespace Present_Clicker_Api
                     return new BadRequestObjectResult("Invalid save request");
                 }
 
-                await using var db = LeaderboardFactory.CreateDBContext("Server=tcp:openlibraryserver.database.windows.net;Authentication=Active Directory Default;Database=SantaClickerDb;", loggerFactory);
+                await using var db = LeaderboardFactory.CreateDBContext("Server=tcp:openlibraryserver.database.windows.net,1433;Initial Catalog=SantaClickerDb;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";", loggerFactory);
 
                 var user = db.Users.FirstOrDefault(u => u.Id == saveReq.Id);
 
