@@ -1,4 +1,4 @@
-Sanat Clicker
+Santa Clicker
 
 This is a very original game (no inspiration from cookie clicker whatsoever).
 
